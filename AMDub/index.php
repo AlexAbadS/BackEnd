@@ -10,7 +10,7 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        Back-end Probando el nombre
+        Back-end Probando el nombre Mario
         <?php
         // put your code here
         ?>
