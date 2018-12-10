@@ -10,7 +10,21 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        Back-end Probando el nombre Mario y Alex
+        <h1>Registro usuario backEnd</h1>
+        <form class="form">
+            Nombre de usuario: <input type="text" placeholder="Username"><br>
+           Contraseña: <input type="password" placeholder="Password"><br>
+           Email: <input type="email" placeholder="mail"><br>
+           Nombre: <input type="text" placeholder="nombre"><br>
+           Apellido: <input type="text" placeholder="apellido"><br>
+           Fecha de nacimiento: <input type="date" ><br>
+           Direccion: <input type="password" ><br>
+           Telefono: <input type="password" ><br>
+           
+            <button type="submit" >Registrar
+            </button>
+        </form>
+
         <?php
         // put your code here
         ?>
