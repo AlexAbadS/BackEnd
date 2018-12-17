@@ -24,7 +24,7 @@ and open the template in the editor.
             <button type="submit" >Registrar
             </button>
         </form>
-
+ 
         <?php
         // put your code here
         ?>
