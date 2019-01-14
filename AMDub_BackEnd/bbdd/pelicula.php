@@ -1,6 +1,6 @@
 <?php
 
-require_once 'tablaclass';
+require_once 'tablaclass.php';
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -28,7 +28,7 @@ class Pelicula extends Tabla {
        $show = ["nombre"];
        $fields = array_slice(array_keys(get_object_vars($this)), 0, $this->num_fields);
        
-       parent::__construct("pelicula", "$idpelicula", $fields, $show);
+       parent::__construct("pelicula", "idpelicula", $fields, $show);
    }
 
    //Getters
@@ -127,7 +127,7 @@ function __get($name) {
        }
    }
 
-   function __set($name, $value) {
+  function __set($name, $value) {
        $metodo = "set$name";
        if (method_exists($this, $metodo)) {
            return $this->$metodo($value);
@@ -152,10 +152,10 @@ function load($id) {
 
 
 function delete() {
-       if (!empty($this->id_doblaje)) {
-           $this->deleteById($this->id_doblaje);
-           $this->id_doblaje = null;
-           $this->titulo = null;
+       if (!empty($this->idpelicula)) {
+           $this->deleteById($this->idpelicula);
+           $this->idpelicula = null;
+           $this->nombre_pelicula = null;
            } else {
            throw new Exception("No hay registro para borrar");
        }
@@ -166,20 +166,20 @@ function delete() {
 private function valores() {
 
        $valores = array_map(function($v) {
-           return $this->$v;
+       return $this->$v;
        }, $this->fields);
        return array_combine($this->fields, $valores);
    }
 
 
    function save() {
-       $doblaje = $this->valores();
-       unset($doblaje['id_doblaje']);
-       if (empty($this->id_doblaje)) {
-           $this->insert($doblaje);
-           $this->id_doblaje = self::$conn->lastInsertId();
+       $pelicula = $this->valores();
+       unset($pelicula['idpelicula']);
+       if (empty($this->idpelicula)) {
+           $this->insert($pelicula);
+           $this->idpelicula = self::$conn->lastInsertId();
        } else {
-           $this->update($this->id_doblaje, $doblaje);
+           $this->update($this->idpelicula, $pelicula);
        }
    }
 }

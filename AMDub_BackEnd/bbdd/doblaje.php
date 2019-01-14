@@ -16,13 +16,13 @@ class doblaje extends Tabla {
    private $num_fields=3;
    private $idusuario;
    private $idpelicula;
-
+   
 
    function __construct() {
        $show = ["nombre"];
        $fields = array_slice(array_keys(get_object_vars($this)), 0, $this->num_fields);
        
-       parent::__construct("Doblaje", "$id_doblaje", $fields, $show);
+       parent::__construct("Doblaje", "id_doblaje", $fields, $show);
    }
 
    //Getters
