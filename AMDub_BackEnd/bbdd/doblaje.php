@@ -1,129 +1,126 @@
 <?php
 
 require_once 'tablaclass.php';
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * and open the template in ther editor.
  */
 
-class doblaje extends Tabla {
-       
-   //Las propiedades mapean las existentes en la base de datos
-   private $id_doblaje;
-   private $titulo;
-   private $audio;
-   private $num_fields=3;
-   private $idusuario;
-   private $idpelicula;
-   
+class Doblaje extends Tabla {
+        //Las propiedades mapean las existentes en la base de datos
+    private $id_doblaje;
+    private $titulo;
+    private $audio;
+    private $idusuario;
+    private $idpelicula;
+    private $num_fields = 5;
 
-   function __construct() {
-       $show = ["nombre"];
-       $fields = array_slice(array_keys(get_object_vars($this)), 0, $this->num_fields);
-       
-       parent::__construct("Doblaje", "id_doblaje", $fields, $show);
-   }
+    function __construct() {
+        $show = ["nombre"];
+        $fields = array_slice(array_keys(get_object_vars($this)), 0, $this->num_fields);
 
-   //Getters
+        parent::__construct("doblaje", "id_doblaje", $fields, $show);
+    }
 
-   function getId_doblaje() {
-       return $this->id_doblaje;
-   }
+    //Getters
 
-   function getTitulo() {
-       return $this->titulo;
-   }
+    function getId_doblaje() {
+        return $this->id_doblaje;
+    }
 
-   function getAudio() {
-       return $this->audio;
-   }
+    function getTitulo() {
+        return $this->titulo;
+    }
 
-   function getIdusuario() {
-       return $this->idusuario;
-   }
+    function getAudio() {
+        return $this->audio;
+    }
 
-   function getIdpelicula() {
-       return $this->idpelicula;
-   }
+    function getIdusuario() {
+        return $this->idusuario;
+    }
 
-   
-   //Setters
-   
-   function setTitulo($titulo) {
-       $this->titulo = $titulo;
-   }
+    function getIdpelicula() {
+        return $this->idpelicula;
+    }
 
-   function setAudio($audio) {
-       $this->audio = $audio;
-   }
+    //Setters
 
-   
+    function setTitulo($titulo) {
+        $this->titulo = $titulo;
+    }
 
-function __get($name) {
-       $metodo = "get$name";
-       if (method_exists($this, $metodo)) {
-           return $this->$metodo();
-       } else {
-           throw new Exception("Propiedad no encontrada");
-       }
-   }
+    function setAudio($audio) {
+        $this->audio = $audio;
+    }
+        function setIdusuario($idusuario) {
+        $this->idusuario = $idusuario;
+    }
 
-   function __set($name, $value) {
-       $metodo = "set$name";
-       if (method_exists($this, $metodo)) {
-           return $this->$metodo($value);
-       } else {
-           throw new Exception("Propiedad no encontrada");
-       }
-   }
+    function setIdpelicula($idpelicula) {
+        $this->idpelicula = $idpelicula;
+    }
 
 
-function load($id) {
-       $doblaje = $this->getById($id);
-                   
-       if (!empty($doblaje)) {
-           $this->id_doblaje = $id;
-           $this->titulo = $doblaje['titulo'];
-                              
-       } else {
-           throw new Exception("No existe ese registro");
-       }
-   }
+    function __get($name) {
+        $metodo = "get$name";
+        if (method_exists($this, $metodo)) {
+            return $this->$metodo();
+        } else {
+            throw new Exception("Propiedad no encontrada");
+        }
+    }
 
+    function __set($name, $value) {
+        $metodo = "set$name";
+        if (method_exists($this, $metodo)) {
+            return $this->$metodo($value);
+        } else {
+            throw new Exception("Propiedad no encontrada");
+        }
+    }
 
+    function load($id) {
+        $doblaje = $this->getById($id);
 
-function delete() {
-       if (!empty($this->id_doblaje)) {
-           $this->deleteById($this->id_doblaje);
-           $this->id_doblaje = null;
-           $this->titulo = null;
-           } else {
-           throw new Exception("No hay registro para borrar");
-       }
-   }
+        if (!empty($doblaje)) {
+            $this->id_doblaje = $id;
+            $this->titulo = $doblaje['titulo'];
+        } else {
+            throw new Exception("No existe ese registro");
+        }
+    }
 
+    function delete() {
+        if (!empty($this->id_doblaje)) {
+            $this->deleteById($this->id_doblaje);
+            $this->id_doblaje = null;
+            $this->titulo = null;
+        } else {
+            throw new Exception("No hay registro para borrar");
+        }
+    }
 
+    private function valores() {
 
-private function valores() {
+        $valores = array_map(function($v) {
+            return $this->$v;
+        }, $this->fields);
+        return array_combine($this->fields, $valores);
+    }
 
-       $valores = array_map(function($v) {
-           return $this->$v;
-       }, $this->fields);
-       return array_combine($this->fields, $valores);
-   }
+    function save() {
+        $doblaje = $this->valores();
+        unset($doblaje['id_doblaje']);
+        if (empty($this->id_doblaje)) {
+            $this->insert($doblaje);
+            $this->id_doblaje = self::$conn->lastInsertId();
+        } else {
+            $this->update($this->id_doblaje, $doblaje);
+        }
+    }
 
-
-   function save() {
-       $doblaje = $this->valores();
-       unset($doblaje['id_doblaje']);
-       if (empty($this->id_doblaje)) {
-           $this->insert($doblaje);
-           $this->id_doblaje = self::$conn->lastInsertId();
-       } else {
-           $this->update($this->id_doblaje, $doblaje);
-       }
-   }
 }
 
 ?>

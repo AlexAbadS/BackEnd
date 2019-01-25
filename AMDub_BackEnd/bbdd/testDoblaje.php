@@ -8,14 +8,15 @@
     </head>
     <body>
         <pre>
-        <?php
+        <?php 
+       require_once 'pelicula.php';
        require_once 'usuario.php';
        require_once 'doblaje.php';
        
        //nuevo registro
        
       $a = new Doblaje();
-      $a->titulo="Truñaco";
+      $a->titulo="FUNCIONA";
       $a->idusuario=1;
       $a->idpelicula=1;
       $a->audio="audio_fake.mp3";
