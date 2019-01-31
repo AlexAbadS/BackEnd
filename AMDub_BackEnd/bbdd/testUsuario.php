@@ -33,7 +33,7 @@ and open the template in the editor.
       
        $a->save();
 
-      $a->load(1);
+  
       
       //update
 //      $a->load(1);

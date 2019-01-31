@@ -1,29 +1,28 @@
 
-
-
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>TestDoblaje</title>
+        <title>TestComentario</title>
     </head>
     <body>
         <pre>
         <?php 
-       require_once 'pelicula.php';
+       require_once 'comentario.php';
        require_once 'usuario.php';
        require_once 'doblaje.php';
+       require_once 'pelicula.php';
        
        //nuevo registro
        
-      $a = new Doblaje();
-      $a->titulo="FUNCIONA";
-      $a->idusuario=1;
-      $a->idpelicula=1;
-      $a->audio="audio_fake.mp3";
+      $a = new Comentario();
+      $a->id_doblaje=1;
+      $a->id_usuario=1;
+      $a->contenido="prueba comentario2";
       $a->save();
       
       
       
+
       
       //update
 //      $a->load(1);
